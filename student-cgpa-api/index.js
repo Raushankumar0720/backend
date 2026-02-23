@@ -21,6 +21,22 @@ const students = [
 
 // ------------------- ROUTES -------------------
 
+// **  Root route → Welcome message
+app.get("/", (req, res) => {
+  res.status(200).send({
+    message: "Welcome to Student CGPA API",
+    availableRoutes: [
+      "/students",
+      "/students/topper",
+      "/students/average",
+      "/students/count",
+      "/students/:id",
+      "/students/branch/:branchName"
+    ]
+  });
+});
+
+
 // 1. GET /students → Return all students
 app.get("/students", (req, res) => {
   res.status(200).json(students);
