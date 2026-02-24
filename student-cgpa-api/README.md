@@ -20,6 +20,9 @@ A RESTful API built with Express.js to manage student academic performance recor
 ## Render deployed url
 - https://backend-7-de2t.onrender.com
 
+## postman documentation link
+- https://documenter.getpostman.com/view/50841514/2sBXcGCynW
+
 ## Steps to Run Locally
 ```bash
 git clone https://github.com/Raushankumar0720/backend.git
