@@ -98,13 +98,17 @@ Body Example:
   "price": 1299
 }
 
-# Render deployed URL 
+## Render deployed URL 
 - https://backend-8-4e3p.onrender.com
 
-# ℹ️ Sample Route 
+## ℹ️ Sample Route 
 - https://backend-8-4e3p.onrender.com/products
 - https://backend-8-4e3p.onrender.com/products/:id
 - https://backend-8-4e3p.onrender.com/products/category/:categoryName
+
+## Postman documentation URL
+- https://documenter.getpostman.com/view/50841514/2sBXcGFLP9
+
 
 ▶️ Steps to Run Locally
 ```bash
