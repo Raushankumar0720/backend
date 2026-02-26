@@ -98,8 +98,13 @@ Body Example:
   "price": 1299
 }
 
-### Render deployed URL 
+# Render deployed URL 
 - https://backend-8-4e3p.onrender.com
+
+# ℹ️ Sample Route 
+- https://backend-8-4e3p.onrender.com/products
+- https://backend-8-4e3p.onrender.com/products/:id
+- https://backend-8-4e3p.onrender.com/products/category/:categoryName
 
 ▶️ Steps to Run Locally
 ```bash
