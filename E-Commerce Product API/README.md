@@ -1,48 +1,238 @@
-# E-Commerce Product API 
+ # 🛒 E-Commerce Product API
 
-# 🎯 Objective
-Develop a RESTful API using Express.js that manages product listings for an e-commerce platform.
-The API uses an in-memory JSON array (no database) and supports CRUD-like operations with proper REST principles and HTTP status codes.
+> A complete **REST API** built with **Express.js** to manage product listings for an e-commerce platform using an in-memory JSON array. No database. No authentication. Pure REST.
 
-# 🛠️ Tech Stack
-- Node.js
-- Express.js
-- CORS Middleware
-- In-memory JSON array (no external DB)
+[![Node.js](https://img.shields.io/badge/Node.js-v22.x-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
+[![Express](https://img.shields.io/badge/Express-v4.18-000000?style=for-the-badge&logo=express&logoColor=white)](https://expressjs.com/)
+[![License](https://img.shields.io/badge/License-ISC-yellow?style=for-the-badge)]()
+[![REST API](https://img.shields.io/badge/REST-API-blue?style=for-the-badge)]()
+[![Render](https://img.shields.io/badge/Deployed-Render-46E3B7?style=for-the-badge&logo=render&logoColor=white)](https://backend-8-4e3p.onrender.com)
 
-# 📂 Project Structure
+---
+
+## 📌 Table of Contents
+
+- [📁 Project Structure](#-project-structure)
+- [🛠 Tech Stack](#-tech-stack)
+- [✨ Features](#-features)
+- [🚀 Setup & Installation](#-setup--installation)
+- [📦 Data Structure](#-data-structure)
+- [📡 API Routes](#-api-routes)
+  - [✅ GET Routes](#-get-routes)
+  - [✅ POST Route](#-post-route)
+  - [✅ PUT Routes](#-put-routes)
+- [📊 Status Codes](#-status-codes)
+- [🔗 Links](#-links)
+- [👨‍💻 Author](#-author)
+
+---
+
+## 📁 Project Structure
+
+```
 backend/
-- │── server.js        # Main application file
-- │── README.md        # Documentation
-- │── package.json     # Dependencies
+├── server.js          ← Main application file (routes + server)
+├── package.json       ← Project metadata & dependencies
+├── package-lock.json  ← Locked dependency versions
+├── .gitignore
+└── README.md
+```
 
+---
 
+## 🛠 Tech Stack
 
-# 📌 Features
-- 3 GET routes → Fetch products
-- 1 POST route → Add new product
-- 3 PUT routes → Update product details
-- Proper HTTP status codes (200, 201, 404)
-- Clean RESTful design
-- No authentication, no validation libraries, no database
+| Technology        | Version  | Purpose                  |
+|-------------------|----------|--------------------------|
+| **Node.js**       | v22.x    | Runtime environment      |
+| **Express.js**    | v4.18    | Web framework            |
+| **CORS**          | v2.8.5   | Cross-origin access      |
+| **In-memory Array**| —       | Data storage (no DB)     |
 
-# 📑 API Endpoints
-🔹 GET Routes
-- GET /products
-→ Returns all products.
-- GET /products/:id
-→ Returns product by ID.
-→ 404 if not found.
-- GET /products/category/:categoryName
-→ Returns products filtered by category.
-→ Empty array if none found.
+---
 
-🔹 POST Route
-- POST /products
-→ Adds a new product.
-→ Auto-generates ID.
-→ Returns 201 with created product.
-Sample Request:
+## ✨ Features
+
+- ✅ **3 GET routes** — Fetch all, by ID, by category
+- ✅ **1 POST route** — Add new product with auto-generated ID
+- ✅ **3 PUT routes** — Full replace, update stock, update price
+- ✅ Proper HTTP status codes (`200`, `201`, `404`)
+- ✅ Clean RESTful design
+- ✅ No authentication, no validation libraries, no database
+
+---
+
+## 🚀 Setup & Installation
+
+### 1️⃣ Clone the Repository
+
+```bash
+git clone https://github.com/Raushankumar0720/backend.git
+cd backend
+```
+
+### 2️⃣ Install Dependencies
+
+```bash
+npm install
+```
+
+### 3️⃣ Start the Server
+
+```bash
+# Production
+node server.js
+
+# Development (with auto-reload)
+npm run dev
+```
+
+### 4️⃣ Base URL
+
+```
+http://localhost:5000
+```
+
+---
+
+## 📦 Data Structure
+
+Each product object follows this exact schema:
+
+```json
+{
+  "id": 1,
+  "name": "Wireless Headphones",
+  "category": "Electronics",
+  "price": 1999,
+  "stock": 50,
+  "rating": 4.5
+}
+```
+
+| Field       | Type     | Description                         |
+|-------------|----------|-------------------------------------|
+| `id`        | `Number` | Unique identifier (auto-generated)  |
+| `name`      | `String` | Product name                        |
+| `category`  | `String` | Product category                    |
+| `price`     | `Number` | Price in ₹ (rupees)                 |
+| `stock`     | `Number` | Available stock quantity            |
+| `rating`    | `Number` | Product rating (out of 5)           |
+
+---
+
+## 📡 API Routes
+
+### ✅ GET Routes
+
+---
+
+#### 🔹 `GET /products`
+
+Returns the complete list of all products.
+
+**Response — `200 OK`**
+
+```json
+[
+  {
+    "id": 1,
+    "name": "Wireless Headphones",
+    "category": "Electronics",
+    "price": 1999,
+    "stock": 50,
+    "rating": 4.5
+  },
+  {
+    "id": 2,
+    "name": "Running Shoes",
+    "category": "Footwear",
+    "price": 2499,
+    "stock": 30,
+    "rating": 4.3
+  }
+]
+```
+
+---
+
+#### 🔹 `GET /products/:id`
+
+Returns a single product by its numeric ID.
+
+**Example Request**
+
+```
+GET /products/1
+```
+
+**Response — `200 OK`**
+
+```json
+{
+  "id": 1,
+  "name": "Wireless Headphones",
+  "category": "Electronics",
+  "price": 1999,
+  "stock": 50,
+  "rating": 4.5
+}
+```
+
+**Response — `404 Not Found`**
+
+```json
+{
+  "message": "Product not found"
+}
+```
+
+---
+
+#### 🔹 `GET /products/category/:categoryName`
+
+Returns all products filtered by category. Returns empty array if none found.
+
+**Example Request**
+
+```
+GET /products/category/Electronics
+```
+
+**Response — `200 OK`**
+
+```json
+[
+  {
+    "id": 1,
+    "name": "Wireless Headphones",
+    "category": "Electronics",
+    "price": 1999,
+    "stock": 50,
+    "rating": 4.5
+  }
+]
+```
+
+**Response (no match) — `200 OK`**
+
+```json
+[]
+```
+
+---
+
+### ✅ POST Route
+
+---
+
+#### 🔹 `POST /products`
+
+Adds a new product. `id` is auto-generated by the server.
+
+**Request Body**
+
+```json
 {
   "name": "Bluetooth Speaker",
   "category": "Electronics",
@@ -50,9 +240,11 @@ Sample Request:
   "stock": 20,
   "rating": 4.6
 }
+```
 
+**Response — `201 Created`**
 
-Sample Response:
+```json
 {
   "id": 6,
   "name": "Bluetooth Speaker",
@@ -61,15 +253,29 @@ Sample Response:
   "stock": 20,
   "rating": 4.6
 }
+```
 
+---
 
+### ✅ PUT Routes
 
-🔹 PUT Routes
-- PUT /products/:id
-→ Replace entire product (except ID).
-→ Requires full object in body.
-→ 404 if not found.
-Body Example:
+> ⚠️ PUT **replaces** the specified fields. All required fields must be provided.
+
+---
+
+#### 🔹 `PUT /products/:id`
+
+Replaces the complete product record (except `id`).
+
+**Example Request**
+
+```
+PUT /products/3
+```
+
+**Request Body**
+
+```json
 {
   "name": "Sports Shoes",
   "category": "Footwear",
@@ -77,50 +283,97 @@ Body Example:
   "stock": 35,
   "rating": 4.7
 }
+```
 
+**Response — `200 OK`** → returns the fully replaced object  
+**Response — `404 Not Found`** → if product ID does not exist
 
+---
 
-- PUT /products/:id/stock
-→ Update only stock value.
-→ 404 if not found.
-Body Example:
+#### 🔹 `PUT /products/:id/stock`
+
+Updates only the `stock` value of a product.
+
+**Example Request**
+
+```
+PUT /products/3/stock
+```
+
+**Request Body**
+
+```json
 {
   "stock": 60
 }
+```
 
+**Response — `200 OK`** → returns updated product object  
+**Response — `404 Not Found`** → if product ID does not exist
 
+---
 
-- PUT /products/:id/price
-→ Update only price.
-→ 404 if not found.
-Body Example:
+#### 🔹 `PUT /products/:id/price`
+
+Updates only the `price` value of a product.
+
+**Example Request**
+
+```
+PUT /products/3/price
+```
+
+**Request Body**
+
+```json
 {
   "price": 1299
 }
+```
 
-## Render deployed URL 
-- https://backend-8-4e3p.onrender.com
+**Response — `200 OK`** → returns updated product object  
+**Response — `404 Not Found`** → if product ID does not exist
 
-## ℹ️ Sample Route 
-- https://backend-8-4e3p.onrender.com/products
-- https://backend-8-4e3p.onrender.com/products/:id
-- https://backend-8-4e3p.onrender.com/products/category/:categoryName
+---
 
-## Postman documentation URL
-- https://documenter.getpostman.com/view/50841514/2sBXcGFLP9
+## 📊 Status Codes
 
+| Code  | Meaning       | When Used                                   |
+|-------|---------------|---------------------------------------------|
+| `200` | OK            | Successful GET or PUT request               |
+| `201` | Created       | Successful POST (new product added)         |
+| `404` | Not Found     | Product ID does not exist                   |
 
-▶️ Steps to Run Locally
-```bash
-git clone https://github.com/Raushankumar0720/backend
-cd backend
-npm install
-node server.js
+---
 
+## 🔗 Links
 
-Server will run on:
-http://localhost:5000
+| Resource              | URL                                                                                        |
+|-----------------------|--------------------------------------------------------------------------------------------|
+| 📂 GitHub Repository  | [github.com/Raushankumar0720/backend](https://github.com/Raushankumar0720/backend)         |
+| 📬 Postman Docs       | [View Collection](https://documenter.getpostman.com/view/50841514/2sBXcGFLP9)              |
+| 🌐 Live API (Render)  | [backend-8-4e3p.onrender.com](https://backend-8-4e3p.onrender.com)                         |
 
+### 🧪 Sample Live URLs
 
+```
+GET  https://backend-8-4e3p.onrender.com/products
+GET  https://backend-8-4e3p.onrender.com/products/1
+GET  https://backend-8-4e3p.onrender.com/products/category/Electronics
+POST https://backend-8-4e3p.onrender.com/products
+PUT  https://backend-8-4e3p.onrender.com/products/1
+PUT  https://backend-8-4e3p.onrender.com/products/1/stock
+PUT  https://backend-8-4e3p.onrender.com/products/1/price
+```
 
+---
 
+## 👨‍💻 Author
+
+**Raushan Kumar**  
+Coding Gita Student | Backend Development  
+GitHub: [@Raushankumar0720](https://github.com/Raushankumar0720)
+
+---
+
+> ⚠️ **Note:** This API uses an **in-memory array**. All data resets when the server restarts. No database is used.
