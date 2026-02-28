@@ -441,8 +441,8 @@ DELETE /states/low-literacy/70
 
 ## 👨‍💻 Author
 
-**Your Name**  
-Raushan kumar | Backend Development  
+**Raushan Kumar**  
+Coding Gita Student | Backend Development  
 GitHub: [Raushankumar0720](https://github.com/Raushankumar0720)
 
 ---
